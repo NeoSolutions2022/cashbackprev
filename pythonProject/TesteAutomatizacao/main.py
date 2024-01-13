@@ -113,7 +113,7 @@ cpf_field = WebDriverWait(driver, 30).until(
 cpf_field.send_keys("janeiro19@hotmail.com")
 
 senha_field = driver.find_element(By.ID, "Senha")
-senha_field.send_keys("Meucpf23")
+senha_field.send_keys("Cbp2023")
 
 driver.find_element(By.ID, "lnkLogin").click()
 
