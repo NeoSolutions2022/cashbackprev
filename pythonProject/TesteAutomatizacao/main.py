@@ -102,50 +102,55 @@ if(arm != ""):
     arm = input("Agora digite o DV: ").strip()
     conta.DV = arm
 
-
 driver = uc.Chrome()
 driver.get('https://conta.e-auditoria.com.br/Login')
 
 cpf_field = WebDriverWait(driver, 30).until(
-    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.ID, 'Email'))
+    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CLASS_NAME, 'styles__ButtonLogin-sc-12061y-3'))
 )
+cpf_field.click()
 
+cpf_field = WebDriverWait(driver, 30).until(
+    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.ID, 'username'))
+)
 cpf_field.send_keys("janeiro19@hotmail.com")
 
-senha_field = driver.find_element(By.ID, "Senha")
-senha_field.send_keys("Cbp2023")
+senha_field = WebDriverWait(driver, 30).until(
+    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.ID, 'password'))
+)
+senha_field.send_keys("=Cbp2023")
 
-driver.find_element(By.ID, "lnkLogin").click()
+driver.find_element(By.ID, "kc-login").click()
 
 driver.maximize_window()
 move_mouse_relative(1729, 358)
 time.sleep(1)
 pyautogui.click()
 
+# buttons = driver.find_elements(By.CSS_SELECTOR, ".btn-success")
+# button = buttons[4]
+# button.click()
+
 elemento = WebDriverWait(driver, 30).until(
-    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CLASS_NAME, "close"))
+    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, 'div.styles__Container-sc-ozds3h-0.dqLiUE'))
+)
+
+buttons = driver.find_elements(By.XPATH, '//div[@class="styles__Container-sc-ozds3h-0 dqLiUE"]')
+button = buttons[1]
+button.click()
+
+elemento = WebDriverWait(driver, 30).until(
+    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, "button.ant-btn.ant-btn-primary.ant-btn-lg"))
+)
+
+buttons = driver.find_elements(By.CSS_SELECTOR, "button.ant-btn.ant-btn-primary.ant-btn-lg")
+button = buttons[1]
+button.click()
+
+elemento = WebDriverWait(driver, 30).until(
+    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, "button.ant-btn.ant-btn-link.ant-btn-lg.ant-btn-icon-only"))
 )
 elemento.click()
-
-buttons = driver.find_elements(By.CSS_SELECTOR, ".btn-success")
-button = buttons[4]
-button.click()
-
-elemento = WebDriverWait(driver, 30).until(
-    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".ant-btn-primary"))
-)
-
-buttons = driver.find_elements(By.CSS_SELECTOR, ".ant-btn-primary")
-button = buttons[1]
-button.click()
-
-elemento = WebDriverWait(driver, 30).until(
-    selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".ant-btn-link"))
-)
-
-buttons = driver.find_elements(By.CSS_SELECTOR, ".ant-btn-link")
-button = buttons[1]
-button.click()
 
 elemento = WebDriverWait(driver, 30).until(
     selenium.webdriver.support.expected_conditions.visibility_of_element_located((By.XPATH, f"//span[text()='{cpfUser}']"))
